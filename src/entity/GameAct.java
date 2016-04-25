@@ -105,6 +105,10 @@ public class GameAct {
 		return true;
 	}
 	/**
+<<<<<<< HEAD
+=======
+	 * @author Administrator
+>>>>>>> 84541cf302178bbc734f35fafa84c1156802471d
 	 * ·½¿éÐý×ª
 	 * Ë³Ê±Õë£º
 	 * A.x=O.y+O.x-B.y
