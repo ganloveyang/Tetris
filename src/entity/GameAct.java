@@ -105,7 +105,7 @@ public class GameAct {
 		return true;
 	}
 	/**
-	 * @author gand
+	 * @author Administrator
 	 * ·½¿éĞı×ª
 	 * Ë³Ê±Õë£º
 	 * A.x=O.y+O.x-B.y
