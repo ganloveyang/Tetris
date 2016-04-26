@@ -62,8 +62,12 @@ public class GameService {
 		//TODO 算分操作
 		//TODO 判断是否升级
 		//TODO 升级
-		//刷新一个新的方块
-		this.dto.getGameAct().init(1);
+		//创建下一个方块
+		this.dto.getGameAct().init(this.dto.getNext());
+		//随机生成下一个方块
+		this.dto.setNext(random.nextInt(MAX_TYPE));
+		
+		 
 		
 	}
 	/**

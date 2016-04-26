@@ -14,7 +14,7 @@ public class LayerGame extends Layer {
 	/**
 	 * ×óÎ»ÒÆÆ«ÒÆÁ¿
 	 */
-	private static int SIZE_ROL=5;
+	private static final int SIZE_ROL=5;
 	
 	public LayerGame(int x, int y, int w, int h) {
 		super(x, y, w, h);
