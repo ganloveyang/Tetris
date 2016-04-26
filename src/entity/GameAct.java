@@ -16,6 +16,10 @@ public class GameAct {
 	 * 方块数组
 	 */
 	private Point[] actPoints=null;
+	/**
+	 * 方块编号
+	 */
+	private int typeCode;
 	
 	private static int MIN_X=0;
 	private static int MAX_X=9;
@@ -68,8 +72,8 @@ public class GameAct {
 		}); 
 	}
 
-	public GameAct(){
-		this.init(0);
+	public GameAct(int typeCode){
+		this.init(typeCode);
 		//TODO 配置文件
 		
 		
@@ -77,8 +81,13 @@ public class GameAct {
 	/**
 	 * 
 	 */
-	public void init(int actCode) {
-	actPoints=TYPE_CONFIG.get(actCode);
+	public void init(int typeCode) {
+		this.typeCode=typeCode;
+		Point[] points=TYPE_CONFIG.get(typeCode);
+	    actPoints=new Point[points.length];
+	    for(int i=0;i<points.length;i++){
+	    	actPoints[i]=new Point(points[i].x,points[i].y);
+	    }
 	}
 
 	public Point[] getActPoints() {
@@ -105,16 +114,16 @@ public class GameAct {
 		return true;
 	}
 	/**
-<<<<<<< HEAD
-=======
-	 * @author Administrator
->>>>>>> 84541cf302178bbc734f35fafa84c1156802471d
 	 * 方块旋转
 	 * 顺时针：
 	 * A.x=O.y+O.x-B.y
 	 * A.x=O.y-O.x+B.x
 	 */
 	public void round(boolean[][] gameMap){
+		//TODO 配置文件
+		if(this.typeCode==4){
+			return;
+		}
 		for(int i=1;i<actPoints.length;i++){
 			int newX=actPoints[0].y+actPoints[0].x-actPoints[i].y;
 			int newY=actPoints[0].y-actPoints[0].x+actPoints[i].x;
@@ -140,6 +149,15 @@ public class GameAct {
 	private boolean isOverZone(int x,int y,boolean[][] gameMap){
 		return x<MIN_X||x>MAX_X||y<MIN_Y||y>MAX_Y||gameMap[x][y];
 	}
+	/**
+	 * 获得方块类型编号
+	 * @return
+	 */
+	public int getTypeCode() {
+		return typeCode;
+	}
+	
 
+	
 	
 }
