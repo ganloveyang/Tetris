@@ -60,4 +60,11 @@ public class GameControl {
 		this.panelGame.repaint();
 	}
 
+	//TODO =======================≤‚ ‘◊®”√===================
+	public void testLevelUp() {
+		// TODO Auto-generated method stub
+		this.gameService.testLevelUp();
+		this.panelGame.repaint();
+	}
+
 }

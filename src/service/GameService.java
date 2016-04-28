@@ -109,4 +109,9 @@ public class GameService {
 		}
 		return true;
 	}
+	//TODO =======================≤‚ ‘◊®”√===================
+	public void testLevelUp() {
+		// TODO Auto-generated method stub
+		this.dto.setNowLevel(this.dto.getNowLevel()+1);
+	}
 }
