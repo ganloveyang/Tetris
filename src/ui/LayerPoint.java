@@ -1,44 +1,61 @@
 package ui;
 
-import java.awt.Graphics;
-import java.awt.Image;
 
-import javax.swing.ImageIcon;
+import java.awt.Graphics;
 
 public class LayerPoint extends Layer {
-	/**
-	 * 窗口标题图片（分数）
-	 */
-	private static final Image IMG_POINT=new ImageIcon("graphics/string/point.png").getImage();
-	private static final int POINT_Y=PADDING;
-	/**
-	 * 窗口标题图片（消行）
-	 */
-	private static final Image IMG_RMLINE=new ImageIcon("graphics/string/rmline.png").getImage();
-	
-	private static final int RMLIN_Y=IMG_RMLINE.getHeight(null)+(PADDING<<1);
 	/**
 	 * 分数的最大位数
 	 */
 	private static final int POINT_BIT=5;
+	//TODO 配置文件
+	private static final int LEVEL_UP=20;
+	/**
+	 * 经验值y坐标
+	 */
+	private  final int expY;
 	
-	private static  int POINT_X;
+	/**
+	 * 消行y坐标
+	 */
+	private  final int rmLineY;
+	/**
+	 * 分数y坐标
+	 */
+	private  final int pointY;
+	
+	/**
+	 * 消行x坐标
+	 */
+	private  final int comX;
 	
 	public LayerPoint(int x, int y, int w, int h) {
 		super(x, y, w, h);
-		//初始化分数显示的X坐标
-		POINT_X=this.w-IMG_NUMBER_W*POINT_BIT-PADDING;
+		//初始化共通X坐标
+		comX=this.w-IMG_NUMBER_W*POINT_BIT-PADDING;
+		//初始化分数显示的Y坐标
+		pointY=PADDING;
+		//初始化消行显示的Y坐标
+		rmLineY=this.pointY+Img.POINT.getHeight(null)+PADDING;
+		//初始化经验值显示的Y坐标
+		this.expY=this.rmLineY+Img.POINT.getHeight(null)+PADDING;
 	}
 	
 	public void paint(Graphics g){
 		this.createWindow(g);
-		//窗口标题(分数)
-		g.drawImage(IMG_POINT, x+PADDING, this.y+POINT_Y, null);
-		this.drawNumber(128, POINT_Y,this.dto.getNowLevel(),5, g);
-		//窗口标题(消行)
-		g.drawImage(IMG_RMLINE, x+PADDING, this.y+RMLIN_Y, null);
-		this.drawNumber(128, RMLIN_Y,this.dto.getNowLevel(),5, g);
-
+		//绘制标题(分数)
+		g.drawImage(Img.POINT, x+PADDING, this.y+pointY, null);
+		//显示分数
+		this.drawNumber(comX, pointY,this.dto.getNowPoint(),POINT_BIT, g);
+		//绘制标题(消行)
+		g.drawImage(Img.RMLINE, x+PADDING, this.y+rmLineY, null);
+		//显示消行
+		this.drawNumber(comX, rmLineY,this.dto.getNowRemoveLine(),POINT_BIT, g);
+		//绘制值槽（经验值）
+		int rmLine=this.dto.getNowRemoveLine();
+		this.drawRect(expY,"下一级",null,(double)(rmLine%LEVEL_UP), (double)LEVEL_UP, g);
+		
 	}
+	
 
 }
