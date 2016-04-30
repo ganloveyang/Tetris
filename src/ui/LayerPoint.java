@@ -53,7 +53,7 @@ public class LayerPoint extends Layer {
 		this.drawNumber(comX, rmLineY,this.dto.getNowRemoveLine(),POINT_BIT, g);
 		//绘制值槽（经验值）
 		int rmLine=this.dto.getNowRemoveLine();
-		this.drawRect(expY,"下一级",null,(double)(rmLine%LEVEL_UP), (double)LEVEL_UP, g);
+		this.drawRect(expY,"下一级",null,(double)(rmLine%LEVEL_UP)/(double)LEVEL_UP, g);
 		
 	}
 	
