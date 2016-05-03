@@ -3,11 +3,13 @@
  */
 package dto;
 
+import java.io.Serializable;
+
 /**
  * @author gandi
  *
  */
-public class Player {
+public class Player implements Comparable<Player>,Serializable{
 
 	private String name;
 	
@@ -27,5 +29,10 @@ public class Player {
 	}
 	public void setPoint(int point) {
 		this.point = point;
+	}
+	
+	@Override
+	public int compareTo(Player pla) {
+		return pla.point-this.point;
 	}
 }

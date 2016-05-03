@@ -4,6 +4,7 @@
 package control;
 
 import dao.Data;
+import dao.DataDisk;
 import dao.DataTest;
 import service.GameService;
 import ui.JPanelGame;
@@ -41,7 +42,7 @@ public class GameControl {
 		//设置数据库记录到游戏
 		this.gameService.setDbRecode(dataA.loadData());
 		//从数据接口B获得本地磁盘记录
-		this.dataB=new DataTest();
+		this.dataB=new DataDisk();
 		//设置本地磁盘记录到游戏
 		this.gameService.setDiskRecode(dataB.loadData());
 	}
