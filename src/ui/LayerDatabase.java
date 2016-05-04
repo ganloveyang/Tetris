@@ -12,7 +12,7 @@ public class LayerDatabase extends LayerData{
 	
 	public void paint(Graphics g){
 		this.createWindow(g);
-		this.showData(Img.DISK, this.dto.getDbRecode(), g);
+		this.showData(Img.DB, this.dto.getDbRecode(), g);
 	}
 
 }

@@ -18,6 +18,6 @@ public interface Data {
 	 * ´æ´¢Êý¾Ý
 	 * @param players
 	 */
-	public void saveData(List<Player> players);
+	public void saveData(Player players);
 	
 }

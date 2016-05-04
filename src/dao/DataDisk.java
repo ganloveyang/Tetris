@@ -43,7 +43,13 @@ public class DataDisk implements Data{
 
 	
 	@Override
-	public void saveData(List<Player> players) {
+	public void saveData(Player pla) {
+		//先取出数据
+		List<Player> players=this.loadData();
+		//TODO 判断记录是否超过5条，如果超过5条，去掉分数低的
+		//追加新纪录
+		players.add(pla);
+		//重新写入
 		ObjectOutputStream oos = null;
 		try {
 			oos = new ObjectOutputStream(new FileOutputStream("save/recode.dat"));

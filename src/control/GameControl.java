@@ -4,6 +4,7 @@
 package control;
 
 import dao.Data;
+import dao.DataBase;
 import dao.DataDisk;
 import dao.DataTest;
 import service.GameService;
@@ -38,7 +39,7 @@ public class GameControl {
 		this.panelGame=panelGame;
 		this.gameService=gameService;
 		//从数据接口A获得数据库记录
-		this.dataA=new DataTest();
+		this.dataA=new DataBase();
 		//设置数据库记录到游戏
 		this.gameService.setDbRecode(dataA.loadData());
 		//从数据接口B获得本地磁盘记录
