@@ -8,6 +8,7 @@ import config.GameConfig;
 
 public class JFrameGame extends JFrame{
 	
+
 	public JFrameGame(JPanelGame panelGame){
 		//ªÒµ√”Œœ∑≈‰÷√
 		GameConfig cfg=ConfigFactory.getGameConfig();

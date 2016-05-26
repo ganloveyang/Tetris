@@ -6,7 +6,6 @@ package service;
 import java.awt.Point;
 import java.util.List;
 import java.util.Random;
-
 import dto.GameDto;
 import dto.Player;
 import entity.GameAct;
@@ -60,7 +59,9 @@ public class GameService {
 			map[act[i].x][act[i].y]=true;
 		}
 		//TODO 判断是否可以消行
+		
 		//TODO 消行操作
+		
 		//TODO 算分操作
 		//TODO 判断是否升级
 		//TODO 升级
@@ -88,9 +89,6 @@ public class GameService {
 	public void KeyRight() {
 	
 			this.dto.getGameAct().move(1, 0,this.dto.getGameMap());
-	
-		// TODO Auto-generated method stub
-		
 	}
 	/**
 	 * 判断是否移动

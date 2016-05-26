@@ -13,8 +13,14 @@ import dto.GameDto;
  *
  */
 public abstract class Layer { 
+	/**
+	 * ÄÚ±ß¾à
+	 */
 	protected static final int PADDING;
-	private static final int SIZE;
+	/**
+	 * ±ß¿ò¿í¶È
+	 */
+	protected static final int SIZE;
 	
 	/**
 	 * Êý×ÖÇÐÆ¬µÄ¿í¶È

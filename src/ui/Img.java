@@ -4,10 +4,14 @@
 package ui;
 
 import java.awt.Image;
+import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.ImageIcon;
 
 /**
+ * 图片类（游戏中各种图片的集合）
  * @author gandi
  *
  */
@@ -54,16 +58,35 @@ public class Img {
 	/**
 	 * 窗口标题（消行）
 	 */
+	public static final Image SHODOW=new ImageIcon("graphics/game/shodow.png").getImage();
+	/**
+	 * 阴影（消行）
+	 */
 	public static final Image RMLINE=new ImageIcon("graphics/string/rmline.png").getImage();
 	/**
 	 * 下一个图片数组
 	 */
 	public static Image[] NEXT_ACT;
 	
+	public static List<Image> BG_LIST;
+	
 	static {
+		//TODO 硬编码
+		//下一个方块图片
 		NEXT_ACT =new Image[7];
 		for(int i=0;i<NEXT_ACT.length;i++){
 			 NEXT_ACT[i]=new ImageIcon("graphics/game/"+i+".png").getImage();
+		}
+		//背景图片数组
+		File dir=new File("graphics/background");
+		File[] files=dir.listFiles();
+		BG_LIST =new ArrayList<Image>();
+		for(File file:files){
+			if(file.isDirectory()){
+				continue;
+			}
+			BG_LIST.add(new ImageIcon(file.getPath()).getImage());
+		
 		}
 	}
 }

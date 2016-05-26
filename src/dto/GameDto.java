@@ -56,7 +56,7 @@ public class GameDto {
 	 * dto³õÊ¼»¯
 	 */
 	public void dtoInit(){
-		//Ó²±àÂë
+		//TODO Ó²±àÂë
 		this.gameMap=new boolean[10][18];
 	}
 	public List<Player> getDbRecode() {

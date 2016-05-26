@@ -16,6 +16,10 @@ public class LayerGame extends Layer {
 	 */
 	private static final int SIZE_ROL=5;
 	
+	private static final int LEFT_SIDE=0;
+	//TODO 硬编码
+	private static final int RIGHT_SIDE=9;
+	
 	public LayerGame(int x, int y, int w, int h) {
 		super(x, y, w, h);
 		
@@ -23,27 +27,57 @@ public class LayerGame extends Layer {
 	
 	public void paint(Graphics g){
 		this.createWindow(g);
-		
 		//获得方块数组集合
 		Point[] points=this.dto.getGameAct().getActPoints();
+		//绘制阴影
+		//TODO 阴影关闭
+		this.drawShadow(points,true,g);
+		
+		
 		//获得方块类型编号(0~6)
 		int typeCode=this.dto.getGameAct().getTypeCode();
 		//绘制方块
 		for(int i=0;i<points.length;i++){
 			drawActByPoint(points[i].x,points[i].y,typeCode+1,g);
 		}
-		//打印地图
+		//绘制地图
 		boolean[][] map=this.dto.getGameMap();
+		//计算当前堆积颜色
+		int lv=this.dto.getNowLevel();
+		int imgIdx=lv==0?0:(lv-1)%7+1;
+		//TODO 如果是输的情况 imgIdx=8
 		for(int x=0;x<map.length;x++){
 			for(int y=0;y<map[x].length;y++){
 				if(map[x][y]){
-					drawActByPoint(x,y,0,g);
+					drawActByPoint(x,y,imgIdx,g);
 				}
 				
 			}
 		}
 		
 	}
+	/**
+	 * 绘制阴影
+	 */
+	private void drawShadow(Point[] points, boolean isShowShadow,Graphics g) {
+		if(!isShowShadow){
+			
+		}
+		int leftX=RIGHT_SIDE;
+		int rightX=LEFT_SIDE;
+		for(Point p:points){
+			leftX=p.x<leftX?p.x:leftX;
+			rightX=p.x>rightX?p.x:rightX;
+		}
+		g.drawImage(Img.SHODOW,
+				this.x+SIZE+(leftX<<SIZE_ROL),
+				this.y+SIZE,
+				(rightX-leftX+1)<<SIZE_ROL,
+				this.h-(SIZE<<1),
+				null
+		);
+	}
+
 	/**
 	 * 绘制正方形块
 	 */

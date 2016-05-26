@@ -90,6 +90,10 @@ public class GameAct {
 	    }
 	}
 
+	/**
+	 * 获得方块数组
+	 * @return
+	 */
 	public Point[] getActPoints() {
 		return actPoints;
 	}

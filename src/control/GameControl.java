@@ -52,7 +52,7 @@ public class GameControl {
 	 * 控制器方向键（上）
 	 */
 	public void KeyUp() {
-		// TODO Auto-generated method stub
+		
 		this.gameService.KeyUp();
 		this.panelGame.repaint();
 	}
@@ -60,7 +60,6 @@ public class GameControl {
 	 * 控制器方向键（下）
 	 */
 	public void KeyDown() {
-		// TODO Auto-generated method stub
 		this.gameService.KeyDown();
 		this.panelGame.repaint();
 	}
@@ -68,7 +67,6 @@ public class GameControl {
 	 * 控制器方向键（左）
 	 */
 	public void KeyLeft() {
-		// TODO Auto-generated method stub
 		this.gameService.KeyLeft();
 		this.panelGame.repaint();
 	}
@@ -76,14 +74,14 @@ public class GameControl {
 	 * 控制器方向键（右）
 	 */
 	public void KeyRight() {
-		// TODO Auto-generated method stub
+	
 		this.gameService.KeyRight();
 		this.panelGame.repaint();
 	}
 
 	//TODO =======================测试专用===================
 	public void testLevelUp() {
-		// TODO Auto-generated method stub
+		
 		this.gameService.testLevelUp();
 		this.panelGame.repaint();
 	}
