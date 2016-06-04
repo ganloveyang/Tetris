@@ -7,6 +7,8 @@ import java.awt.Graphics;
 import java.awt.Image;
 import java.util.List;
 
+import config.GameConfig;
+
 import dto.Player;
 
 /**
@@ -14,8 +16,10 @@ import dto.Player;
  *
  */
 public abstract class LayerData extends Layer{
-	//TODO 最大数据行 配置文件
-	private static final int MAX_ROW=5;
+	/**
+	 * 最大数据行
+	 */
+	private static final int MAX_ROW=GameConfig.getDataConfig().getMaxRow();
 
 	/**
 	 * 起始Y坐标

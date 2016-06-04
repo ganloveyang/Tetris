@@ -11,6 +11,7 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import dto.Player;
@@ -21,13 +22,18 @@ import dto.Player;
  */
 public class DataDisk implements Data{
 
-	private static final String FILE_PATH="save/recode.dat";
+	private  final String filepath;
+	
+	public DataDisk(HashMap<String,String> param){
+		this.filepath=param.get("path");
+	}
+	
 	@Override
 	public List<Player> loadData() {
 		ObjectInputStream ois=null;
 		List<Player> players=null;
 		try {
-			ois=new ObjectInputStream(new FileInputStream(FILE_PATH));
+			ois=new ObjectInputStream(new FileInputStream(filepath));
 			players= (List<Player>)ois.readObject();
 		} catch (Exception e) {
 			e.printStackTrace();

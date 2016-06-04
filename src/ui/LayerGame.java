@@ -1,20 +1,16 @@
 package ui;
 
-import java.awt.Font;
 import java.awt.Graphics;
-import java.awt.Image;
 import java.awt.Point;
 
-import javax.swing.ImageIcon;
+import config.GameConfig;
 
 public class LayerGame extends Layer {
 	
-
-	//TODO ÅäÖÃÎÄ¼þ
 	/**
 	 * ×óÎ»ÒÆÆ«ÒÆÁ¿
 	 */
-	private static final int SIZE_ROL=5;
+	private static final int SIZE_ROL=GameConfig.getFrameConfig().getSizeRol();
 	
 	private static final int LEFT_SIDE=0;
 	//TODO Ó²±àÂë
@@ -70,10 +66,10 @@ public class LayerGame extends Layer {
 			rightX=p.x>rightX?p.x:rightX;
 		}
 		g.drawImage(Img.SHODOW,
-				this.x+SIZE+(leftX<<SIZE_ROL),
-				this.y+SIZE,
+				this.x+BORDER+(leftX<<SIZE_ROL),
+				this.y+BORDER,
 				(rightX-leftX+1)<<SIZE_ROL,
-				this.h-(SIZE<<1),
+				this.h-(BORDER<<1),
 				null
 		);
 	}

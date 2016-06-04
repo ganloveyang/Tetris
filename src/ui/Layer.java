@@ -4,7 +4,7 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Image;
-import config.ConfigFactory;
+import config.FrameConfig;
 import config.GameConfig;
 import dto.GameDto;
 /**
@@ -20,7 +20,7 @@ public abstract class Layer {
 	/**
 	 * 边框宽度
 	 */
-	protected static final int SIZE;
+	protected static final int BORDER;
 	
 	/**
 	 * 数字切片的宽度
@@ -53,9 +53,9 @@ public abstract class Layer {
 	
 	static{
 		//获得游戏配置
-		GameConfig cfg=ConfigFactory.getGameConfig();
-		PADDING=cfg.getPadding();
-		SIZE=cfg.getWindowSize();
+		FrameConfig fCfg=GameConfig.getFrameConfig();
+		PADDING=fCfg.getPadding();
+		BORDER=fCfg.getBorder();
 	}
 	
 	private static int WINDOW_W=Img.WINDOW.getWidth(null);
@@ -92,23 +92,23 @@ public abstract class Layer {
 	 */
     protected void  createWindow(Graphics g){
     			//左上
-    			g.drawImage(Img.WINDOW, x, y, x+SIZE, y+SIZE, 0, 0, SIZE, SIZE, null);
+    			g.drawImage(Img.WINDOW, x, y, x+BORDER, y+BORDER, 0, 0, BORDER, BORDER, null);
     			//中上
-    			g.drawImage(Img.WINDOW, x+SIZE, y, w+x-SIZE, y+SIZE, SIZE, 0, WINDOW_W-SIZE, SIZE, null);
+    			g.drawImage(Img.WINDOW, x+BORDER, y, w+x-BORDER, y+BORDER, BORDER, 0, WINDOW_W-BORDER, BORDER, null);
     			//右上
-    			g.drawImage(Img.WINDOW, x+w-SIZE, y, x+w, y+SIZE, WINDOW_W-SIZE, 0, WINDOW_W, SIZE, null);
+    			g.drawImage(Img.WINDOW, x+w-BORDER, y, x+w, y+BORDER, WINDOW_W-BORDER, 0, WINDOW_W, BORDER, null);
     			//左中
-    			g.drawImage(Img.WINDOW, x, y+SIZE, x+SIZE, y+h-SIZE, 0, SIZE, SIZE,WINDOW_H-SIZE, null);
+    			g.drawImage(Img.WINDOW, x, y+BORDER, x+BORDER, y+h-BORDER, 0, BORDER, BORDER,WINDOW_H-BORDER, null);
     			//正中
-    			g.drawImage(Img.WINDOW, x+SIZE, y+SIZE, x+w-SIZE, y+h-SIZE, SIZE, SIZE, WINDOW_W-SIZE,WINDOW_H-SIZE, null);
+    			g.drawImage(Img.WINDOW, x+BORDER, y+BORDER, x+w-BORDER, y+h-BORDER, BORDER, BORDER, WINDOW_W-BORDER,WINDOW_H-BORDER, null);
     			//右中
-    			g.drawImage(Img.WINDOW, x+w-SIZE, y+SIZE, x+w, y+h-SIZE, WINDOW_W-SIZE, SIZE, WINDOW_W, WINDOW_H-SIZE, null);
+    			g.drawImage(Img.WINDOW, x+w-BORDER, y+BORDER, x+w, y+h-BORDER, WINDOW_W-BORDER, BORDER, WINDOW_W, WINDOW_H-BORDER, null);
     			//左下
-    			g.drawImage(Img.WINDOW, x, y+h-SIZE, x+SIZE, y+h, 0, WINDOW_H-SIZE, SIZE, WINDOW_H, null);
+    			g.drawImage(Img.WINDOW, x, y+h-BORDER, x+BORDER, y+h, 0, WINDOW_H-BORDER, BORDER, WINDOW_H, null);
     			//中下
-    			g.drawImage(Img.WINDOW, x+SIZE, y+h-SIZE, w+x-SIZE, y+h, SIZE, WINDOW_H-SIZE, WINDOW_W-SIZE, WINDOW_H, null);
+    			g.drawImage(Img.WINDOW, x+BORDER, y+h-BORDER, w+x-BORDER, y+h, BORDER, WINDOW_H-BORDER, WINDOW_W-BORDER, WINDOW_H, null);
     			//右下
-    			g.drawImage(Img.WINDOW, x+w-SIZE, y+h-SIZE, x+w, y+h, WINDOW_W-SIZE, WINDOW_H-SIZE, WINDOW_W, WINDOW_H, null);
+    			g.drawImage(Img.WINDOW, x+w-BORDER, y+h-BORDER, x+w, y+h, WINDOW_W-BORDER, WINDOW_H-BORDER, WINDOW_W, WINDOW_H, null);
     }
     
    

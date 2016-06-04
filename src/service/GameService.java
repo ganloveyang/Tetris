@@ -79,8 +79,6 @@ public class GameService {
 	public void KeyLeft() {
 		
 			this.dto.getGameAct().move(-1, 0,this.dto.getGameMap());
-
-		// TODO Auto-generated method stub
 		
 	}
 	/**

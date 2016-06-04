@@ -7,6 +7,8 @@ import java.awt.Point;
 import java.util.ArrayList;
 import java.util.List;
 
+import config.GameConfig;
+
 /**
  * @author gandi
  *
@@ -21,62 +23,15 @@ public class GameAct {
 	 */
 	private int typeCode;
 	
-	private static int MIN_X=0;
-	private static int MAX_X=9;
-	private static int MIN_Y=0;
-	private static int MAX_Y=17;
+	private static int MIN_X=GameConfig.getSystemConfig().getMinX();
+	private static int MAX_X=GameConfig.getSystemConfig().getMaxX();
+	private static int MIN_Y=GameConfig.getSystemConfig().getMinY();
+	private static int MAX_Y=GameConfig.getSystemConfig().getMaxY();
 	
-	private static List<Point[]> TYPE_CONFIG;
-	static{
-		TYPE_CONFIG =new ArrayList<Point[]>(7);
-		TYPE_CONFIG.add(new Point[]{
-				new Point(4,0),
-				new Point(3,0),
-				new Point(5,0),
-				new Point(6,0),
-		}); 
-		TYPE_CONFIG.add(new Point[]{
-				new Point(4,0),
-				new Point(3,0),
-				new Point(5,0),
-				new Point(4,1),
-		}); 
-		TYPE_CONFIG.add(new Point[]{
-				new Point(4,0),
-				new Point(3,0),
-				new Point(5,0),
-				new Point(3,1),
-		}); 
-		TYPE_CONFIG.add(new Point[]{
-				new Point(4,0),
-				new Point(5,0),
-				new Point(3,1),
-				new Point(4,1),
-		}); 
-		TYPE_CONFIG.add(new Point[]{
-				new Point(4,0),
-				new Point(5,0),
-				new Point(4,1),
-				new Point(5,1),
-		}); 
-		TYPE_CONFIG.add(new Point[]{
-				new Point(4,0),
-				new Point(3,0),
-				new Point(5,0),
-				new Point(5,1),}); 
-		TYPE_CONFIG.add(new Point[]{
-				new Point(4,0),
-				new Point(3,0),
-				new Point(4,1),
-				new Point(5,1),
-		}); 
-	}
+	private final static List<Point[]> TYPE_CONFIG=GameConfig.getSystemConfig().getTypeConfig();
 
 	public GameAct(int typeCode){
 		this.init(typeCode);
-		//TODO ≈‰÷√Œƒº˛
-		
-		
 	}
 	/**
 	 * 

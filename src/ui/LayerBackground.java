@@ -6,7 +6,7 @@ public class LayerBackground extends Layer {
     
 	public LayerBackground(int x, int y, int w, int h) {
 		super(x, y, w, h);
-		// TODO Auto-generated constructor stub
+		
 	}
 
 	@Override

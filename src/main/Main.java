@@ -17,7 +17,12 @@ public class Main {
 		//创建游戏逻辑块（安装游戏数据源）
 		GameService service=new GameService(dto);
 		//创建游戏控制器（链接游戏面板与游戏逻辑块）
-		GameControl  gameControl=new GameControl(panel,service);
+		GameControl gameControl = null;
+		try {
+			gameControl = new GameControl(panel,service);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		//创建玩家控制器（链接游戏控制器）
 		PlayerControl playerControl=new PlayerControl(gameControl);
 		//安装玩家控制器

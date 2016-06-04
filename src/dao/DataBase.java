@@ -9,6 +9,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import dto.Player;
@@ -19,19 +20,25 @@ import dto.Player;
  */
 public class DataBase implements Data{
 
-	private static String DRIVER ="com.microsoft.sqlserver.jdbc.SQLServerDriver";
-	private static String DB_URI="jdbc:sqlserver://127.0.0.1:1433;database=game_test";
-	private static String DB_USER="sa";
-	private static String DB_PWD="gandi123";
+	private final String dburl;
+	private final String dbuser;
+	private final String dbpwd;
 	private static String LOAD_SQL="select Top 5 user_name,point from user_point where type_id=1 order by point desc";
 	private static String SAVE_SQL="INSERT INTO user_point(user_name,point,type_id) VALUES (?,?,?)";
-	static{
+	
+	
+	public DataBase(HashMap<String,String>param){
+		
+		this.dburl=param.get("dburl");
+		this.dbuser=param.get("dbuser");
+		this.dbpwd=param.get("dbpwd");
 		try {
-			Class.forName(DRIVER);
+			Class.forName(param.get("driver"));
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		}
 	}
+	
 	@Override
 	public List<Player> loadData() {
 		Connection conn=null;
@@ -39,7 +46,7 @@ public class DataBase implements Data{
 		ResultSet rs=null;
 		List<Player> players=new ArrayList<Player>();
 		try {
-			conn=DriverManager.getConnection(DB_URI,DB_USER,DB_PWD);
+			conn=DriverManager.getConnection(dburl,dbuser,dbpwd);
 			stmt=conn.prepareStatement(LOAD_SQL);
 			rs=stmt.executeQuery();
 			while(rs.next()){
@@ -67,7 +74,7 @@ public class DataBase implements Data{
 		Connection conn=null;
 		PreparedStatement stmt=null;
 		try {
-			conn=DriverManager.getConnection(DB_URI,DB_USER,DB_PWD);
+			conn=DriverManager.getConnection(dburl,dbuser,dbpwd);
 			stmt=conn.prepareStatement(SAVE_SQL);
 			stmt.setObject(1,players.getName());
 			stmt.setObject(2,players.getPoint());
@@ -85,10 +92,7 @@ public class DataBase implements Data{
 		}
 	}
 
-	public static void main(String[] args){
-		DataBase db=new DataBase();
-		db.saveData(new Player("GM",9999));
-	}
+	
 	
 
 }

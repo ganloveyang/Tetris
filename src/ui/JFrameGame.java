@@ -2,8 +2,7 @@ package ui;
 
 
 import javax.swing.JFrame;
-
-import config.ConfigFactory;
+import config.FrameConfig;
 import config.GameConfig;
 
 public class JFrameGame extends JFrame{
@@ -11,13 +10,13 @@ public class JFrameGame extends JFrame{
 
 	public JFrameGame(JPanelGame panelGame){
 		//获得游戏配置
-		GameConfig cfg=ConfigFactory.getGameConfig();
+		FrameConfig fCfg=GameConfig.getFrameConfig();
 		//设置标题
-		this.setTitle(cfg.getTitle());
+		this.setTitle(fCfg.getTitle());
 		//设置默认关闭属性（程序结束）
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	    //设置窗口大小
-		this.setSize(cfg.getWidth(), cfg.getHeight());
+		this.setSize(fCfg.getWidth(), fCfg.getHeight());
 		//不允许用户改变大小
 		this.setResizable(false);
 		//窗口居中设置
