@@ -23,15 +23,24 @@ public class SystemConfig {
 	
 	private final int maxY;
 	
+	private final int levelUp;
+	
 	private final List<Point[]> typeConfig;
+	
+	private final List<Boolean> typeRound;
 	public SystemConfig(Element system){
 		this.minX=Integer.parseInt(system.attributeValue("minX"));
 		this.maxX=Integer.parseInt(system.attributeValue("maxX"));
 		this.minY=Integer.parseInt(system.attributeValue("minY"));
 		this.maxY=Integer.parseInt(system.attributeValue("maxY"));
+		this.levelUp=Integer.parseInt(system.attributeValue("levelUp"));
 		List<Element> rects=system.elements("rect");
 		typeConfig=new ArrayList<Point[]>(rects.size());
+		typeRound=new ArrayList<Boolean>(rects.size());
 		for(Element rect:rects){
+			//是否旋转
+			this.typeRound.add(Boolean.parseBoolean(rect.attributeValue("round")));
+			//获得坐标对象
 			List<Element> pointConfig=rect.elements("point");
 			//创建Point对象数组
 			Point[] points=new Point[pointConfig.size()];
@@ -61,5 +70,11 @@ public class SystemConfig {
 	public List<Point[]> getTypeConfig() {
 		return typeConfig;
 	}
-		
+	public int getLevelUp() {
+		return levelUp;
+	}
+	public List<Boolean> getTypeRound() {
+		return typeRound;
+	}
+	
 }

@@ -107,7 +107,7 @@ public class GameService {
 		}
 		return true;
 	}
-	//TODO =======================测试专用===================
+	//TODO ==========测试专用===================
 	public void testLevelUp() {
 		int point=this.dto.getNowPoint();
 		int rmLine=this.dto.getNowRemoveLine();

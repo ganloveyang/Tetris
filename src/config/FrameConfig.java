@@ -20,6 +20,7 @@ public class FrameConfig {
 	private final int padding;
 	private final int border;
 	private final int sizeRol;
+	private final int loseIdx;
 	/**
      * Õº≤„ Ù–‘
      */
@@ -40,6 +41,8 @@ public class FrameConfig {
 		this.windowUp=Integer.parseInt(frame.attributeValue("windowUp"));
 		//ÕºøÈ≥ﬂ¥Á◊ÛŒª“∆∆´“∆¡ø
 		this.sizeRol=Integer.parseInt(frame.attributeValue("sizeRol"));
+		//”Œœ∑ ß∞‹Õº∆¨
+		this.loseIdx=Integer.parseInt(frame.attributeValue("loseIdx"));
 		//ªÒ»°¥∞ÃÂ Ù–‘
 		@SuppressWarnings("unchecked")
 		List<Element> Layers=frame.elements("layer");
@@ -88,6 +91,10 @@ public class FrameConfig {
 
 	public int getSizeRol() {
 		return sizeRol;
+	}
+
+	public int getLoseIdx() {
+		return loseIdx;
 	}
 	
 

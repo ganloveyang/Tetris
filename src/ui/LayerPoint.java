@@ -3,13 +3,17 @@ package ui;
 
 import java.awt.Graphics;
 
+import config.GameConfig;
+
 public class LayerPoint extends Layer {
 	/**
 	 * 分数的最大位数
 	 */
 	private static final int POINT_BIT=5;
-	//TODO 配置文件
-	private static final int LEVEL_UP=20;
+	/**
+	 * 升级行数
+	 */
+	private static final int LEVEL_UP=GameConfig.getSystemConfig().getLevelUp();
 	/**
 	 * 经验值y坐标
 	 */

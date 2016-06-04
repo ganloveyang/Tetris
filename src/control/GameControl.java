@@ -4,15 +4,13 @@
 package control;
 
 import java.lang.reflect.Constructor;
-import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.util.HashMap;
+import java.util.Map;
 
 import config.DataInterfaceConfig;
 import config.GameConfig;
 import dao.Data;
-import dao.DataBase;
-import dao.DataDisk;
-import dao.DataTest;
 import service.GameService;
 import ui.JPanelGame;
 
@@ -41,6 +39,11 @@ public class GameControl {
 	 * 游戏逻辑层
 	 */
 	private GameService gameService;
+	/**
+	 * 游戏行为控制
+	 */
+	private Map<Integer,Method> actionList;
+	
 	public GameControl(JPanelGame panelGame,GameService gameService) throws Exception, SecurityException{
 		this.panelGame=panelGame;
 		this.gameService=gameService;
@@ -54,18 +57,21 @@ public class GameControl {
 		this.dataB=createDataObject(GameConfig.getDataConfig().getDataB());
 		//设置本地磁盘记录到游戏
 		this.gameService.setDiskRecode(dataB.loadData());
+		//初始化游戏行为
+		actionList=new HashMap<Integer,Method>();
+		//TODO 配置文件
+		actionList.put(69, this.gameService.getClass().getMethod("KeyUp"));
+		actionList.put(68, this.gameService.getClass().getMethod("KeyDown"));
+		actionList.put(83, this.gameService.getClass().getMethod("KeyLeft"));
+		actionList.put(70, this.gameService.getClass().getMethod("KeyRight"));
+		actionList.put(38, this.gameService.getClass().getMethod("testLevelUp"));
 	}
 	/**
 	 * 创建数据对象
 	 * @param cfg
-	 * @throws SecurityException 
-	 * @throws NoSuchMethodException 
 	 * @throws Exception 
-	 * @throws IllegalArgumentException 
-	 * @throws IllegalAccessException 
-	 * @throws InstantiationException 
 	 */
-	private Data createDataObject(DataInterfaceConfig cfg ) throws NoSuchMethodException, SecurityException, InstantiationException, IllegalAccessException, IllegalArgumentException, Exception{
+	private Data createDataObject(DataInterfaceConfig cfg ) throws  Exception{
 		try {
 			//获得类对象
 			Class<?> cls=Class.forName(cfg.getClassName());
@@ -73,49 +79,28 @@ public class GameControl {
 			Constructor<?> ctr=cls.getConstructor(HashMap.class);
 			//创建对象
 			return (Data)ctr.newInstance(cfg.getParam());
+			
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 			return null;
 		}
 		
 	}
+	/**
+	 * 根据玩家控制来决定行为
+	 * @param keyCode
+	 */
+	public void actionByKeyCode(int keyCode) {
 	
-	/**
-	 * 控制器方向键（上）
-	 */
-	public void KeyUp() {
-		
-		this.gameService.KeyUp();
-		this.panelGame.repaint();
-	}
-	/**
-	 * 控制器方向键（下）
-	 */
-	public void KeyDown() {
-		this.gameService.KeyDown();
-		this.panelGame.repaint();
-	}
-	/**
-	 * 控制器方向键（左）
-	 */
-	public void KeyLeft() {
-		this.gameService.KeyLeft();
-		this.panelGame.repaint();
-	}
-	/**
-	 * 控制器方向键（右）
-	 */
-	public void KeyRight() {
-	
-		this.gameService.KeyRight();
+		try {
+			if(this.actionList.containsKey(keyCode)){
+				this.actionList.get(keyCode).invoke(this.gameService);
+				} 
+			}catch (Exception e) {
+				e.printStackTrace();
+		}
 		this.panelGame.repaint();
 	}
 
-	//TODO =======================测试专用===================
-	public void testLevelUp() {
-		
-		this.gameService.testLevelUp();
-		this.panelGame.repaint();
-	}
 
 }

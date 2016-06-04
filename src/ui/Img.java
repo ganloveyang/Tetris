@@ -10,6 +10,8 @@ import java.util.List;
 
 import javax.swing.ImageIcon;
 
+import config.GameConfig;
+
 /**
  * 图片类（游戏中各种图片的集合）
  * @author gandi
@@ -71,9 +73,8 @@ public class Img {
 	public static List<Image> BG_LIST;
 	
 	static {
-		//TODO 硬编码
 		//下一个方块图片
-		NEXT_ACT =new Image[7];
+		NEXT_ACT =new Image[GameConfig.getSystemConfig().getTypeConfig().size()];
 		for(int i=0;i<NEXT_ACT.length;i++){
 			 NEXT_ACT[i]=new ImageIcon("graphics/game/"+i+".png").getImage();
 		}

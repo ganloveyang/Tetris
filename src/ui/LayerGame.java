@@ -13,8 +13,8 @@ public class LayerGame extends Layer {
 	private static final int SIZE_ROL=GameConfig.getFrameConfig().getSizeRol();
 	
 	private static final int LEFT_SIDE=0;
-	//TODO 硬编码
-	private static final int RIGHT_SIDE=9;
+	
+	private static final int RIGHT_SIDE=GameConfig.getSystemConfig().getMaxX();
 	
 	public LayerGame(int x, int y, int w, int h) {
 		super(x, y, w, h);
@@ -26,7 +26,7 @@ public class LayerGame extends Layer {
 		//获得方块数组集合
 		Point[] points=this.dto.getGameAct().getActPoints();
 		//绘制阴影
-		//TODO 阴影关闭
+		
 		this.drawShadow(points,true,g);
 		
 		
@@ -56,6 +56,7 @@ public class LayerGame extends Layer {
 	 * 绘制阴影
 	 */
 	private void drawShadow(Point[] points, boolean isShowShadow,Graphics g) {
+		//TODO 阴影关闭
 		if(!isShowShadow){
 			
 		}
