@@ -56,15 +56,26 @@ public class Img {
 	 * 窗口标题图片（分数）
 	 */
 	public static final Image POINT=new ImageIcon("graphics/string/point.png").getImage();
-	
+
 	/**
 	 * 窗口标题（消行）
 	 */
-	public static final Image SHODOW=new ImageIcon("graphics/game/shodow.png").getImage();
-	/**
-	 * 阴影（消行）
-	 */
 	public static final Image RMLINE=new ImageIcon("graphics/string/rmline.png").getImage();
+	
+	/**
+	 * 阴影
+	 */
+	public static final Image SHODOW=new ImageIcon("graphics/game/shodow.png").getImage();
+	
+	/**
+	 * 开始按钮
+	 */
+	public static final ImageIcon BTN_START=new ImageIcon("graphics/string/start.png");
+	
+	/**
+	 * 设置按钮
+	 */
+	public static final ImageIcon BTN_CONFIG=new ImageIcon("graphics/string/config.png");
 	/**
 	 * 下一个图片数组
 	 */

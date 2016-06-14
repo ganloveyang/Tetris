@@ -1,15 +1,19 @@
 package ui;
 
 import java.awt.Graphics;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.lang.reflect.Constructor;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.swing.JButton;
 import javax.swing.JPanel;
 
 import config.FrameConfig;
 import config.GameConfig;
 import config.LayerConfig;
+import control.GameControl;
 import control.PlayerControl;
 import dto.GameDto;
 
@@ -17,27 +21,33 @@ public class JPanelGame extends JPanel {
 	
 	
 	private static final long serialVersionUID = 1L;
+	
+	private static final int BTN_SIZE_W=GameConfig.getFrameConfig().getButtonConfig().getButtonW();
+	
+	private static final int BTN_SIZE_H=GameConfig.getFrameConfig().getButtonConfig().getButtonH();
+	
 	private List<Layer> layers=null;
+	
 	private GameDto dto=null;
+	
+	private JButton btnStart;
+	
+	private JButton btnConfig;
+	
+	private GameControl gameControl=null;
+	
 	public JPanelGame(GameDto dto){
 		//获得dto对象
 		this.dto=dto;
+		//设置布局管理器为自由布局
+		this.setLayout(null);
 		//初始化组件
 		 initComponent();
 		//初始化层
          initLayer();
-		//		layers=new Layer[]{
-//				//TODO 硬编码
-//				new LayerBackground(0,0,1200,700),
-//				new LayerDatabase(40,32,334,279),
-//				new LayerDisk(40,343,334,279),
-//				new LayerGame(414,32,334,590),
-//				new LayerButton(788,32,334,124),
-//				new LayerNext(788,188,176,148),
-//				new LayerLevel(964,188,158,148),
-//				new LayerPoint(788,368,334,200),
-//		};
+       
 	}
+	
 	/**
 	 * 安装玩家控制器
 	 * @param control
@@ -49,7 +59,30 @@ public class JPanelGame extends JPanel {
 	 * 初始化组件
 	 */
     private void initComponent(){
-    	
+		//初始化开始按钮
+		this.btnStart=new JButton(Img.BTN_START);
+		//设置开始按钮位置
+		btnStart.setBounds(
+				GameConfig.getFrameConfig().getButtonConfig().getStartX(),
+				GameConfig.getFrameConfig().getButtonConfig().getStartY(),
+				BTN_SIZE_W, BTN_SIZE_H);
+		//添加按钮到面板
+		this.add(btnStart);
+		//初始化设置按钮
+		this.btnConfig=new JButton(Img.BTN_CONFIG);
+		//设置按钮位置
+		btnConfig.setBounds(
+				GameConfig.getFrameConfig().getButtonConfig().getUserConfigX(),
+				GameConfig.getFrameConfig().getButtonConfig().getUserConfigY(),
+				BTN_SIZE_W, BTN_SIZE_H);
+		this.btnConfig.addActionListener(new ActionListener(){
+			@Override
+			public void actionPerformed(ActionEvent e) {
+			gameControl.showUserConfig();
+			}
+		});
+		//添加按钮到面板
+		this.add(btnConfig);
 		
 	}
 	/**
@@ -97,6 +130,9 @@ public class JPanelGame extends JPanel {
 			}
 		//返回焦点
 	    this.requestFocus();
-		
 	}
+	public void setGameControl(GameControl gameControl) {
+		this.gameControl = gameControl;
+	}
+	
 }

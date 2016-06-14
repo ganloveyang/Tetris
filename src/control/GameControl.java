@@ -3,16 +3,24 @@
  */
 package control;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.ObjectInputStream;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Method;
+import java.security.KeyStore.Entry;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Set;
 
 import config.DataInterfaceConfig;
 import config.GameConfig;
 import dao.Data;
 import service.GameService;
+import service.GameTetris;
 import ui.JPanelGame;
+import ui.cfg.FrameConfig;
 
 /**
  * 接受玩家键盘事件
@@ -40,11 +48,18 @@ public class GameControl {
 	 */
 	private GameService gameService;
 	/**
+	 * 游戏控制窗口
+	 */
+	private FrameConfig frameConfig;
+	
+	/**
 	 * 游戏行为控制
 	 */
 	private Map<Integer,Method> actionList;
 	
-	public GameControl(JPanelGame panelGame,GameService gameService) throws Exception, SecurityException{
+	private GameControl gameControl;
+	
+	public GameControl(JPanelGame panelGame,GameTetris gameService) throws Exception, SecurityException{
 		this.panelGame=panelGame;
 		this.gameService=gameService;
 		//从数据接口A获得数据库记录
@@ -57,14 +72,29 @@ public class GameControl {
 		this.dataB=createDataObject(GameConfig.getDataConfig().getDataB());
 		//设置本地磁盘记录到游戏
 		this.gameService.setDiskRecode(dataB.loadData());
-		//初始化游戏行为
-		actionList=new HashMap<Integer,Method>();
-		//TODO 配置文件
-		actionList.put(69, this.gameService.getClass().getMethod("KeyUp"));
-		actionList.put(68, this.gameService.getClass().getMethod("KeyDown"));
-		actionList.put(83, this.gameService.getClass().getMethod("KeyLeft"));
-		actionList.put(70, this.gameService.getClass().getMethod("KeyRight"));
-		actionList.put(38, this.gameService.getClass().getMethod("testLevelUp"));
+		//读取用户控制设置
+		this.setControlConfig();
+		//初始化用户配置窗口
+		this.frameConfig=new FrameConfig(this);
+	}
+	/**
+	 * 读取用户控制设置
+	 */
+	private void setControlConfig(){
+		//创建键盘码与方法名的映射数组
+		this.actionList=new HashMap<Integer,Method>();
+		try {
+			ObjectInputStream ois=new ObjectInputStream(new FileInputStream("data/control.dat"));
+			@SuppressWarnings("unchecked")
+			HashMap<Integer,String> cfgSet=(HashMap<Integer,String>)ois.readObject();
+			Set<java.util.Map.Entry<Integer,String>> entryset=cfgSet.entrySet();
+			for(java.util.Map.Entry<Integer,String> e:entryset){
+				actionList.put(e.getKey(), this.gameService.getClass().getMethod(e.getValue()));
+			}
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
+		
 	}
 	/**
 	 * 创建数据对象
@@ -100,6 +130,20 @@ public class GameControl {
 				e.printStackTrace();
 		}
 		this.panelGame.repaint();
+	}
+	/**
+	 * 显示玩家控制窗口
+	 */
+	public void showUserConfig() {
+		this.frameConfig.setVisible(true);
+		
+	}
+	/**
+	 * 子窗口关闭事件
+	 */
+	public void setOver() {
+		this.panelGame.repaint();
+		this.setControlConfig();
 	}
 
 
